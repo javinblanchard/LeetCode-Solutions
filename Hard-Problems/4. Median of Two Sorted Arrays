@@ -1,0 +1,21 @@
+https://leetcode.com/problems/median-of-two-sorted-arrays/description/
+
+public class Solution {
+    public double FindMedianSortedArrays(int[] nums1, int[] nums2) {
+        
+        List<int> SortedList = new List<int>();
+        SortedList = nums1.Concat(nums2).ToList();
+        SortedList.Sort();
+        int n = SortedList.Count();
+        if (n % 2 == 0){
+            int medianIndex = (n/2) - 1;
+            int medianIndex2 = (n/2);
+            double median = (SortedList[medianIndex] + SortedList[medianIndex2])/2.0;
+            return median;
+        }
+        else{
+            int medianIndex = (n/2);
+            return SortedList[medianIndex];
+            }
+    }
+}
