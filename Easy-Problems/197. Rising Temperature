@@ -1,0 +1,12 @@
+https://leetcode.com/problems/rising-temperature/description/
+
+/* Write your T-SQL query statement below */
+SELECT Id 
+FROM 
+(SELECT Id, 
+temperature, 
+recordDate, 
+lag(recordDate) OVER (ORDER BY recordDate) PRV_date,  
+lag(temperature) OVER (ORDER BY recordDate) PRV_temp 
+FROM Weather) AS InnerQuery
+WHERE temperature > PRV_temp AND DATEDIFF(day, PRV_date, recordDate) = 1
