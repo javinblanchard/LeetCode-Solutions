@@ -1,0 +1,32 @@
+https://leetcode.com/problems/design-parking-system/description/
+
+public class ParkingSystem {
+    
+    public int bigSpots;
+    public int mediumSpots;
+    public int smallSpots;
+    
+    public ParkingSystem(int big, int medium, int small) {
+        bigSpots = big;
+        mediumSpots = medium;
+        smallSpots = small;
+    }
+    
+    public bool AddCar(int carType) {
+        if (carType == 1 && bigSpots >=1){//Big car
+            bigSpots -= 1;
+            return true;
+        }
+        else if (carType == 2 && mediumSpots >= 1){//Medium Car
+            mediumSpots -= 1;
+            return true;
+        }
+        else if (carType == 3 && smallSpots >= 1){//Small Car
+            smallSpots -= 1;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}
