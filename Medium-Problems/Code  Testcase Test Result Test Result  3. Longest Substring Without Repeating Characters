@@ -1,0 +1,42 @@
+https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
+
+public class Solution {
+    public int LengthOfLongestSubstring(string s) {
+        
+        string LongestSubStr = "";
+        string currNonRepeatingString = "";
+        
+        foreach(char c in s){
+            //check if character is contained in the current string
+            if (currNonRepeatingString.Contains(c)){ 
+                
+                //get index of the repeated character
+                int newSubstringIndex = currNonRepeatingString.IndexOf(c); 
+                
+                //check if repeated character is the last char in the string
+                if(currNonRepeatingString.Length -1 > newSubstringIndex){ 
+                    //start new substring after the repeated character's index
+                    newSubstringIndex += 1; 
+                    currNonRepeatingString = currNonRepeatingString.Substring(newSubstringIndex);
+                }
+                else{
+                    //we know the repeated chracter is last one in the current string so we can just start over.
+                    currNonRepeatingString = "";
+                }
+                //add repeated character to current string after removing the first one
+                currNonRepeatingString += c;
+            }
+            else{
+                //add new character to current string
+                currNonRepeatingString += c;
+                
+                //set the longest substring equal to current substring if it is longer than the previous longest
+                if(currNonRepeatingString.Length > LongestSubStr.Length){
+                    LongestSubStr = currNonRepeatingString;
+                }
+            }
+        }
+        
+        return LongestSubStr.Length;
+    }
+}
