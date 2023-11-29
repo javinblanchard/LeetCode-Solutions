@@ -1,0 +1,7 @@
+https://leetcode.com/problems/stone-game/description/
+
+public class Solution {
+    public bool StoneGame(int[] piles) {
+        return true;
+    }
+}
