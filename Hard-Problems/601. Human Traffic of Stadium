@@ -1,0 +1,14 @@
+https://leetcode.com/problems/human-traffic-of-stadium/description/
+
+SELECT id, visit_date, people 
+FROM (SELECT id, 
+        visit_date, 
+        people, 
+        LAG(people, 2) OVER(ORDER BY Id) prev2ppl, 
+        LAG(people) OVER(ORDER BY Id) prevppl, 
+        LEAD(people, 2) OVER(ORDER BY Id) next2ppl, 
+        LEAD(people) OVER(ORDER BY Id) nextppl   
+      FROM Stadium ) AS InnerQuery 
+WHERE people >= 100 
+      AND ((prev2ppl >= 100 AND prevppl >= 100) OR (next2ppl >= 100 AND nextppl >= 100) 
+      OR ( prevppl >= 100 AND nextppl >= 100))
