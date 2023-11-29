@@ -1,0 +1,8 @@
+https://leetcode.com/problems/market-analysis-i/description/
+
+/* Write your T-SQL query statement below */
+SELECT user_Id as buyer_id, join_date, (SELECT Count(*) 
+FROM ORDERS 
+WHERE buyer_id = user_id
+ AND order_date BETWEEN '2019-01-01' AND '2020-01-01') as orders_in_2019 
+FROM Users
