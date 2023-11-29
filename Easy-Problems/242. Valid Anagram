@@ -1,0 +1,21 @@
+https://leetcode.com/problems/valid-anagram/description/
+
+public class Solution {
+    public bool IsAnagram(string s, string t) {
+     
+        char[] array1 = s.ToCharArray();
+        char[] array2 = t.ToCharArray();
+        
+        Array.Sort(array1);
+        Array.Sort(array2);
+        
+        string sortedString1 = new string(array1);
+        string sortedString2 = new string(array2);
+        if(sortedString1 == sortedString2){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}
