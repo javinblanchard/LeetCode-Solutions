@@ -1,0 +1,14 @@
+https://leetcode.com/problems/second-highest-salary/description/
+
+/* Write your T-SQL query statement below */
+
+
+SELECT SUM(Salary) AS SecondHighestSalary FROM 
+(
+    SELECT Salary, 
+    row_number() over (ORDER BY Salary DESC) AS RowNUM
+    FROM Employee
+    GROUP BY Salary
+    ) AS TempTable
+    
+WHERE RowNUM = 2
