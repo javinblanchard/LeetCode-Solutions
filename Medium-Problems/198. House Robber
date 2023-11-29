@@ -1,0 +1,86 @@
+https://leetcode.com/problems/house-robber/description/
+
+public class Solution {
+    public int Rob(int[] nums)
+        {
+            
+            int Max1stHouseAmount = 0;
+            int Max2ndHouseAmount = 0;
+            Graph graph = new Graph(nums, nums.Length);
+            Dictionary<int, int> memo = new Dictionary<int, int>();
+            bool[] visited = new bool[nums.Length];
+            Max1stHouseAmount = graph.DFS(0, nums,visited,  memo);
+            if(nums.Length > 1)
+            {
+            Max2ndHouseAmount = graph.DFS(1, nums, visited,  memo);
+            }
+            if (Max1stHouseAmount < Max2ndHouseAmount)
+            {
+                return Max2ndHouseAmount;
+            }
+            else
+            {
+                return Max1stHouseAmount;
+            }
+            
+        }
+   public class Graph
+    {
+        private int V; // number of vertices
+        private List<int>[] adj; // adjacency list
+        Dictionary<List<int>, int> PossibleRobRoutes = new Dictionary<List<int>, int>();
+
+        public Graph(int[] nums, int v)
+        {
+            V = v;
+            adj = new List<int>[v];
+            for (int i = 0; i < v; i++)
+            {
+                adj[i] = new List<int>();
+            }
+            //create graph
+            for (int i = 0; i < nums.Length; i++)
+            {
+                //add edges safely
+                if(i + 2 < nums.Length)
+                {
+                    AddEdge(i, i + 2);
+                }
+                if(i + 3 < nums.Length)
+                {
+                    AddEdge(i, i + 3);
+                }
+            }
+        }
+
+        public void AddEdge(int v, int w)
+        {
+            adj[v].Add(w);
+        }
+
+    public int DFS(int currentHouse, int[] houses, bool[] visited, Dictionary<int, int> memo)
+{
+    if (memo.ContainsKey(currentHouse))
+    {
+        return memo[currentHouse];
+    }
+
+    visited[currentHouse] = true;
+    int maxMoney = houses[currentHouse];
+    foreach (int neighbor in adj[currentHouse])
+    {
+        if (!visited[neighbor])
+        {
+            int neighborMoney = DFS(neighbor, houses, visited, memo);
+            maxMoney = Math.Max(maxMoney, houses[currentHouse] + neighborMoney);
+        }
+    }
+    visited[currentHouse] = false;
+
+    memo[currentHouse] = maxMoney;
+    return maxMoney;
+}
+
+    }
+    
+}
