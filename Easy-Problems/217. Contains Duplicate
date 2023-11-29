@@ -1,0 +1,15 @@
+https://leetcode.com/problems/contains-duplicate/description/
+
+public class Solution {
+    public bool ContainsDuplicate(int[] nums) {
+    HashSet<int> distinctNumbers = new HashSet<int>();
+
+    foreach (int num in nums) {
+        if (!distinctNumbers.Add(num)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+}
